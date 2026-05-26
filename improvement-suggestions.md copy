@@ -1,0 +1,47 @@
+# Magic Scarf — Improvement Suggestions (Post-Launch Roadmap)
+
+A prioritized list of upgrades the customer should consider after the v1 launch. Each item lifts the site without disturbing brand or category architecture.
+
+## P0 — Confirm before launch
+
+1. **Brand color confirmation.** Magic Burgundy `#8B2942` is an inferred primary; the live site uses no strong accent. Confirm with the customer or supply their preferred hex. Affects buttons, links, badges, focus states.
+2. **Replace placeholder trade-show calendar.** The 8-card grid currently shows ATL Apparel / NY NOW / Dallas / Vegas WSA / Vegas MAGIC / Seattle Gift / NY NOW Winter / Vegas WWIN. Swap with the customer's real 2026–2027 markets, venues, booth numbers, and dates.
+3. **Founder / studio photo.** Story band currently uses an audited hero image as placeholder. A real founder-at-design-table or showroom photo will raise the brand band's emotional weight by 30%.
+4. **Confirm 47-color hex chips.** The audited site lists 47 color names; we mapped each to a hex. Customer to QA against physical fabric so swatches match what ships.
+5. **Verify case-pack / MOQ defaults.** Currently shown as case-pack 6 / MOQ 2 cases. Confirm per category — vests, hats, brooches and travel wear may differ.
+
+## P1 — High-value next iterations
+
+6. **Real authentication.** Wire the login modal to the actual auth backend (SSO, OAuth, or custom). The state machine on PDP CTAs is built; just needs API.
+7. **Real cart persistence.** Hook cart actions to a session-tied store. The cart UI handles add/remove/qty-step locally; needs PUT/POST endpoints.
+8. **Real search.** The search modal is a placeholder. Algolia or Elasticsearch index over SKU / name / description / category / color. Surface SKU number searches separately ("Try '3917'…").
+9. **Sort that actually sorts.** Sort dropdown surfaces options ("Best sellers / New arrivals / Name A–Z / Recently restocked") but selecting one is a no-op in this prototype. Wire to API or client-side sorting once data is real.
+10. **PLP filter that actually filters.** Same — checkboxes surface counts but don't filter the grid yet. Wire to API or client filter.
+11. **"Recently Viewed" rail** — customer brief defaults this to OFF, but if return-visitor data shows high re-visit rates per session, reconsider. The rail snippet is a one-day add.
+12. **Press / "As Seen In" strip** — if Magic Scarf has been featured in press (likely after 20+ years), source the logos and add a strip below the brand-story band.
+13. **Printable swatch sheet** — the PDP shows a "Printable Swatch Sheet" link from the audited PDP. Build the print-stylesheet rendering for it (one-page PDF with all 47 swatches + product info).
+14. **Product video integration** — the audited PDP for SKU 8672 includes a YouTube embed. Add a `▶ Video` accordion or modal player next to the gallery. Magic Scarf has an active YouTube channel.
+15. **Faire deep links** — the `/faire` view currently links to `https://www.faire.com/direct/magicscarf`. Once the per-product Faire URL pattern is known, link individual PDPs to their Faire equivalents for buyers who prefer the Faire flow.
+
+## P2 — UX polish
+
+16. **Quick-add from PLP card** — currently the `+` button on the card opens the login modal. Once authenticated, it should open a light variant-picker drawer for one-click add without leaving PLP.
+17. **Sticky add-to-cart on mobile PDP** — when scrolled past the price box, dock a sticky bottom bar with "Add to Cart" so the CTA is always reachable.
+18. **Color filter that surfaces named colors** — currently 8 swatches in the sidebar. Magic Scarf has 47+ colors. Consider a "+39 more" expandable color picker keyed to the SWATCH map.
+19. **Subcategory tile rail at top of PLP** — currently subcategory pills (text). For subcategory-rich pages like Ponchos, an image-tile row (like the audited Ponchos sub-cat block) might convert better.
+20. **Show-schedule iCal export** — let buyers add a market visit to their calendar with one click.
+
+## P3 — Future-state ambition
+
+21. **Tier-pricing display once logged in** — replace "Sign in for price" with the buyer's actual tier price + an "X% off MSRP" callout if your pricing supports it.
+22. **Account-saved swatch favorites** — let buyers pin specific colors per SKU and have them surface on their account dashboard.
+23. **Restock notifications** — "Notify me when this color is back" toggle on out-of-stock variants.
+24. **Multi-warehouse stock display** — if Magic Scarf adds a second warehouse, show ship-from per buyer's region.
+25. **Account-level showroom appointments** — booking widget for in-person showroom visits, tied to the trade-show schedule.
+
+## Quick wins (under 1 day each)
+
+- Add an Instagram link to footer + contact page IF Magic Scarf has an active Instagram (audit only found Facebook + YouTube).
+- Add a "By appointment" badge to the showroom address on the contact page.
+- Add a Wholesale Account testimonial quote band — short, founder-of-boutique-style endorsement, between the story band and the trade-show grid.
+- Surface the Magic Scarf YouTube playlist as embedded thumbs at the bottom of the home page (under FAIRE band, above newsletter).

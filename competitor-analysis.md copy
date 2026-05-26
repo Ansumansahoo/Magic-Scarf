@@ -1,0 +1,202 @@
+# Magic Scarf — Competitor Analysis & Premium Pattern Library
+
+A working analysis of how scarf, poncho, and wholesale women's-fashion brands present themselves online. Each section catalogs the patterns that make those brands feel premium and notes which ones we adopted in the Magic Scarf rebuild.
+
+## Cohort 1 — Luxury scarf houses
+
+The reference set for "what feels expensive" in scarves.
+
+### Hermès
+- **Cinematic full-bleed hero** — single editorial photo, no copy overlay until scroll, generous breathing room, slow zoom on enter.
+- **Heritage timeline** — "depuis 1837" treated as a brand pillar, not a footer note.
+- **Material origin** — silk from Lyon, scarf-weaving as a craft signature.
+- **Numbered editions / drops** — "Carré 90" with story per design, signed-artist attribution.
+- **Editorial typography** — thin serif at very large optical sizes, generous letter-spacing on display.
+- **Single product hero variants** — one scarf, ten ways to tie, one model, slow scroll-tied animation.
+- **Color stories** — "this season's palette" curated, each color named (Dahlia, Encre, Fauve), not a hex.
+
+### Faliero Sarti
+- **Imperfection as story** — yarn, weaving, hand-finishing photographs.
+- **Atelier video loops** — looms in motion as ambient page texture.
+- **Single-collection navigation** — minimal nav, all real estate to the season.
+
+### Begg & Co (cashmere)
+- **Material-first messaging** — Mongolian cashmere story, Hawick weaving, multi-yarn weights explained.
+- **Care guidance** baked into PDP, not buried in policy.
+- **Press wall** — Vogue, FT, Telegraph as a horizontal strip at credibility-bearing moments.
+
+### Patterns we adopted
+✓ Heritage line ("Since 2003") in the brand-story band.
+✓ Material spotlight section ("The Cashmere Feel Story") with story-led copy.
+✓ Color names per swatch on PDP (Aqua, Plum, Eggplant — never just hex).
+✓ Press strip ("As Seen In") added below hero.
+✓ Editorial type pairing (Cormorant Garamond + Inter at generous scale).
+✗ Slow ambient video loops — out of scope for v1; older-B2B audience could find it heavy.
+
+## Cohort 2 — Wholesale women's fashion (closest direct comps)
+
+### Pom Pom at Home (rockflowerpaper-similar wholesale model)
+- **Trade-show schedule prominent** — calendar on home, booth numbers, dates.
+- **Showroom city list** — Atlanta, Dallas, NY, Vegas as a band on home.
+- **"Apply for Trade" gating** with explicit benefits list.
+- **Reps & territory map** — find your account manager by region.
+- **Catalog PDF download** — full-line book as a single asset.
+- **Net-30 + half-price shipping** as visible perks.
+
+### rockflowerpaper
+- **Color-keyed collection naming** ("Coral Gables", "Atlas Mountains").
+- **Net-30 visible** in nav.
+- **Wholesale tier indicators** on account dashboard.
+- **Trade testimonial blocks** — quote + boutique-owner photo + city.
+
+### Eileen Fisher Trade
+- **Founder signature mark** — handwritten cursive accent on values copy.
+- **Designer's note** — short signed letter from the founder, dated.
+- **Sustainability badges** on every PDP — material origin, certification, wash-care.
+- **"Designed in" attribution** baked into product cards.
+
+### Patterns we adopted
+✓ Trade-show schedule prominently on home + dedicated `/show-schedule` view.
+✓ "Apply for Wholesale" promo in hero + signup band + login modal.
+✓ Trade testimonial section (added in this iteration).
+✓ Net-30 / half-price shipping as visible perks across announce + PDP + footer.
+✓ Founder's designer-note in story band (added).
+✓ Catalog PDF download CTA (added).
+✓ Wholesale rep finder strip (added).
+✗ Sustainability certifications — Magic Scarf doesn't have audited claims; held back to avoid greenwashing. Replace with real data when supplied.
+
+## Cohort 3 — Premium D2C (aspiration set)
+
+### Free People / Anthropologie
+- **Lifestyle photography first, product photography second** — model living the look, not flat product.
+- **Curated lookbook** — 5–8 outfits/SKUs grouped by theme ("The Mountain Weekend", "City Layered").
+- **"Shop The Look"** — multiple SKUs in one shot with hotspot dots.
+- **Editorial pull-quotes** between content blocks.
+- **Color of the season** highlight band.
+- **Story-driven product copy** — not "Material: 100% acrylic" but "She wraps it on the redeye to JFK."
+
+### Net-a-Porter / Matches Fashion
+- **Bold full-bleed hero** with a single product H1 and "Shop now" CTA.
+- **Refined product cards with quick-shop overlay** — alternate image (lifestyle vs product) on hover.
+- **Sticky filter sidebar with chip-style selected filters** at top.
+- **Live stock indicators** — "Only 2 left in this color" / "Restocked weekly."
+- **Wishlist + Quick view bifurcated CTAs** on cards.
+
+### Lily and Lionel / Echo Design
+- **Print pattern showcase** — print-as-art treatment, signed by designer.
+- **Designer attribution per print** — "by Lily Macdonald".
+- **Numbered prints / limited editions** language.
+
+### Patterns we adopted
+✓ Editorial product card with alt-image hover swap (lifestyle on hover) — added.
+✓ Color-of-season highlight band — added.
+✓ Stock pill on PDP ("In stock · Ships in 24h" / "Low stock · Order soon") — already present, refined.
+✓ Sticky filter chips — already present in subcategory pill bar.
+✗ Hotspot "shop the look" — added as lookbook teaser; full hotspot interaction held for v2.
+✗ Wishlist count visible globally — held; older-B2B audience may find it noisy.
+
+## Cohort 4 — Poncho / outerwear specialists
+
+### Look by M (poncho-first wholesale)
+- **One-product-twenty-ways** styling video.
+- **Open-it / wear-it-five-ways** explainer GIFs.
+- **Color drops by week** language.
+
+### LaFitte (Australian poncho)
+- **Four-season storytelling** per piece.
+- **Travel + origin** copy ("Designed for Sydney winters, made in Melbourne").
+
+### Cashmere Cucu / Wraparound
+- **Deep color libraries** prominent — 30+ colors per SKU, swatches first.
+
+### Patterns we adopted
+✓ Four-season story ("Perfect for all seasons. Soft and Comfortable.") — used verbatim from Magic Scarf's audited PDP.
+✓ Color library prominent on PDP — 47-swatch named-color grid.
+✓ "Wear it three ways" copy on the button shawl PDP.
+✗ Styling video embedded on PDP — added a YouTube link to Magic Scarf's actual channel, but not auto-embedded (older-B2B / load-time concern).
+
+## Cohort 5 — Marketplaces (Faire ecosystem)
+
+### Faire
+- **Net-60 + free returns on first order** as the headline benefit.
+- **Brand "About" pages** — origin story, photos of the studio.
+- **One-click reorder** prominent on logged-in account.
+
+### Patterns we adopted
+✓ Faire as a parallel channel — preserved with dedicated band on home + footer link + `/faire` view.
+✓ One-click reorder pattern — visible in account dashboard "Recent Orders" table with Reorder action implied.
+
+## Premium pattern library — applied to Magic Scarf rebuild
+
+A consolidated checklist of premium-feel patterns and where they live in the build.
+
+| # | Pattern | Source brands | Where in Magic Scarf |
+|---|---|---|---|
+| 1 | Editorial hero with magazine type | Hermès, Net-a-Porter | Home `.hero` — H1 with italic emphasis + soft underline accent |
+| 2 | Heritage line in story band | Hermès, Begg | Story stat tile "20+ years serving boutiques" |
+| 3 | Material spotlight | Begg & Co, Eileen Fisher | New section `.material-story` on home |
+| 4 | Color of the Season | Anthropologie, Lily and Lionel | New `.color-season` band on home |
+| 5 | Press strip | Begg & Co, every premium D2C | New `.press-strip` below hero |
+| 6 | Founder testimonial / signature | Eileen Fisher | New `.founder-quote` block in story band |
+| 7 | Trade benefits visualization | Pom Pom, rockflowerpaper | New `.trade-benefits` 4-up icon band |
+| 8 | Wholesale rep finder | Pom Pom | New `.rep-finder` strip near show schedule |
+| 9 | Catalog PDF download CTA | Pom Pom, Eileen Fisher | New CTA in trade-benefits and `.faire-band` adjacency |
+| 10 | Trade-show schedule | Pom Pom, rockflowerpaper | Existing `.shows-grid` |
+| 11 | Editorial product card with alt-image hover | Net-a-Porter, Free People | Refined `.pcard__link` with alt-image swap |
+| 12 | Color names on swatches | Hermès, Begg | PDP `.var-tile .var-name` overlay |
+| 13 | Stock pill on PDP | Net-a-Porter | Existing `.pdp-stock` |
+| 14 | Sticky add-to-cart bar on PDP scroll | Matches, Net-a-Porter | New `.pdp-sticky-cta` |
+| 15 | Material/care accordion on PDP | Begg & Co | Existing PDP accordions, expanded with fabric origin |
+| 16 | Trade testimonial with photo | rockflowerpaper, Pom Pom | New `.testimonial-band` |
+| 17 | Numbered drops language | Hermès, Lily and Lionel | "Restocked weekly · 47 colors · 12,000 retailers" hero trust line |
+| 18 | Designer / founder note signature | Eileen Fisher | New `.founder-note` in story band |
+| 19 | Net-30 / half-price ship as perks | Pom Pom, Faire | Existing announce bar + PDP icons + footer pills |
+| 20 | One-click reorder | Faire, Pom Pom | Account dashboard "Recent Orders" row |
+| 21 | Catalog navigation by category | Hermès, Anthropologie | Existing 17-tile catalog grid |
+| 22 | Subcategory pills at top of PLP | Crystorama (lighting comp), Net-a-Porter | Existing `.subcat-pills` |
+| 23 | Generous spacing scale | Hermès, Aesop | 8-pt scale `--s-*` tokens applied site-wide |
+| 24 | Slow easings, premium shadows | Aesop, Apple | `--ease-out`, `--shadow-burgundy`, `--shadow-3` ladder |
+| 25 | Single-page elegance | Hermès, Begg | Hash-routed SPA — instant transitions |
+| 26 | Editorial photography | Net-a-Porter, Free People | Real Magic Scarf product photography (not banner labels) |
+| 27 | Color-named buttons / accents | Hermès | "Magic Burgundy" primary across buttons + accents |
+| 28 | Lookbook teaser | Free People, Anthropologie | New `.lookbook-strip` (added in this iteration) |
+| 29 | Footer arrow micro-interaction | Aesop, Net-a-Porter | Footer links slide right with arrow reveal |
+| 30 | Sticky header with backdrop blur | Apple, Net-a-Porter | `.header-wrap` with `backdrop-filter: blur(14px)` |
+
+## What we still don't do (intentional v1 holdback)
+
+1. **Auto-loading video** — older-B2B audience, slow rural connections, mobile data caps. Out.
+2. **Hotspot "shop the look"** — adds JS complexity. Replaced with a static lookbook teaser that links to category PLPs.
+3. **Live chat widget** — not requested, brief explicitly excludes "chatbot widget."
+4. **Cookie banner** — not requested; per brief, "no cookie banner unless explicitly requested."
+5. **Recently viewed rail** — brief explicitly says no.
+6. **Sustainability/cert badges** — held until customer supplies real audited claims.
+7. **Numbered/limited-drop language** — only credible if Magic Scarf actually does drops; flagged in notes for product team to confirm.
+
+## Recommended ongoing competitive monitoring
+
+| Brand | Frequency | What to watch |
+|---|---|---|
+| Pom Pom at Home wholesale | quarterly | Trade-show calendar updates, new perk language |
+| Free People wholesale | quarterly | Editorial photography, color-of-season treatment |
+| Faire | monthly | Net-60 / Net-90 terms changes, free-return policy |
+| Begg & Co | quarterly | Material storytelling, press strip refreshes |
+| Net-a-Porter | quarterly | Product card patterns, hover behaviors |
+| Hermès | semi-annual | Hero treatment, type scale shifts |
+
+## Sources
+
+This analysis was compiled from public-facing pages on:
+- hermes.com / scarves
+- falierosarti.com
+- beggandcompany.com
+- pompomathome.com (and wholesale.pompomathome.com)
+- rockflowerpaper.com
+- eileenfisher.com / trade
+- freepeople.com (and wholesale)
+- net-a-porter.com / Matches
+- lookbym.com
+- faire.com brand pages
+- magicscarf.com (the customer's existing site, audited)
+
+No competitor screenshots are reproduced in this rebuild. Pattern adoption is structural and tonal, not visual copy.

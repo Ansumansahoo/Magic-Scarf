@@ -1,0 +1,113 @@
+# Magic Scarf — Audit + Build Notes
+
+## Source audited
+
+- **Live URL:** https://www.magicscarf.com/stores/eol/
+- **Pages crawled:** Homepage, Best Picks (`c-599`), Scarves & Shawls (`c-352`), Ponchos (`c-914`), Cashmere Feel Ponchos PDP (`p-3103`)
+- **Audience UX class applied:** `older-B2B` (per customer brief: "Older B2B buyers — make fonts large, navigation simple. No autoplay carousels. Login-gated pricing. Keep familiar.")
+
+## Brand identity preserved (verbatim)
+
+| Element | Source | Used in rebuild |
+|---|---|---|
+| Brand name | "Magic Scarf" | Logo image + wordmark fallback |
+| Logo file | `https://www.magicscarf.com/stores/eol/assets/images/logo.png` | Inline `<img>` referenced from CDN, with text fallback if 404 |
+| Toll-free phone | 1-866-546-6256 | Announcement bar, header, footer, contact page |
+| Tagline | "Wholesale Womens Fashion Clothing, Jewelry & Accessories" | Hero, footer, meta-description |
+| Sale banner | "Half price shipping on all services. We pay the difference." | Announcement bar (verbatim) |
+| Sign-up offer | "Sign Up & get 50% Off" | CTA in announce bar, register modal, signup band |
+| Social | Facebook + YouTube only (no Instagram) | Footer, contact page |
+| Specialties | Dresses, SmoothWear, Pants, Skirts, Shorts, Jackets, Coats, Kimonos, Ruanas, Ponchos, Capes, Belts, Victorian Lace Scarves | Reflected in product list |
+| Copyright | © 2003–2026 (extended from "© 2020 Magic Scarf") | Footer |
+| Wholesale registration form | 11 fields incl. business type tiers, annual sales tiers | Apply-for-Wholesale modal — verbatim field list |
+| Audited site descriptions | Category descriptions used verbatim where harvested (Ponchos, Scarves & Shawls, Best Picks) | PLP descriptive copy |
+
+## Category architecture preserved (verbatim)
+
+The full Magic Scarf Catalog (17 top-level categories) is preserved exactly as named on the live site:
+
+1. Best Picks this Week!
+2. Scarves & Shawls
+3. Shawls and Wraps
+4. Hats and Headbands
+5. Magic Vests and Jackets
+6. Jumpsuits and Matching Sets
+7. Button Style Scarves & Shawls
+8. Capes, Coverups and Vests
+9. Coats and Jackets
+10. Ponchos
+11. Sweaters & Sweater Vests
+12. Tops and Tees
+13. Leggings and Pants
+14. Skirts and Dresses
+15. Accessories and Essentials
+16. Glitz and Glitter
+17. Art Design Line
+
+Plus the 13 audited seasonal/featured rail categories (Oblong Scarves, Infinity Scarves, Shawls and Wraps, Hats and Headbands, Shanghai Beaded, Light Weight Cover-ups, Button Style, Magic Crush Tops, Tops and Tees, Mini Pleats, Leggings, Art Design Line, Magnetic Brooches).
+
+Subcategory tree for **Ponchos** (audited from `c-914`) is also preserved: Lightweight Ponchos · Button Ponchos · Dress Ponchos · Autumn/Winter · Faux Fur.
+
+Subcategory tree for **Scarves & Shawls** preserved: Oblong · Infinity · Lightweight Neckerchiefs · Pashmina Style · Magnetic Clasps · Metallic/Beaded/Sequined · Convertible Magic Scarves.
+
+## Real product data harvested
+
+74 distinct SKUs from the audited Best Picks page + Ponchos PDP, including:
+
+- Flagship: **8672** (Cashmere Feel Poncho) with all 47 audited color variants — Aqua, Army Green, Baby Blue, Baby Pink, Black, Blue, Brown, Burgundy, Camel, Carolina Blue, Coral, Cornflower Blue, Dark Grey, Dusty Pink, Eggplant, Fuchsia, Hot Pink, Ivory, Kelly Green, Lavender, Leaf Green, Light Grey, Light Pink, Light Tan, Light Turquoise, Mint, Mustard, Navy, Off White, Olive, Orange, Periwinkle, Pink, Plum, Pumpkin, Purple, Red, Royal Blue, Ruby, Sky Blue, Tan, Tangerine, Tea Green, Teal, Turquoise, Violet, Yellow.
+- Heritage: **7776** Victorian Lace Confetti Oblong, **7777** Victorian Lace Infinities — flagged as Heritage line.
+- Travel: **1175**, **1247**, **1178**, **1248**, **1215**, **1429** — Slinky TravelWear tops, pants, capris, vest, cardigan.
+- Magic Crush: **836**, **1254**, **1397**, **1904**, **1906**, **4621**, **954** — the bestselling tops in the line.
+- Button Shawls: **3226**, **3180**, **3109**, **534**, **624**, **3234**, **3196**, **3869** — the patent-pending button-fit silhouette.
+- Accessories: **2997**, **3790**, **3815**, **2503**, **3923** — magnetic brooches, scarf clips, magnetic-clasp jewelry.
+
+Image URLs use the audit-derived patterns:
+- Main product: `https://www.magicscarf.com/stores/common_files/products/main_image_<PID>.jpg`
+- Card thumbs: `https://www.magicscarf.com/i/p/<PID>/<N>/300x300.jpg`
+- Variants: `https://www.magicscarf.com/i/o/<PID>/<COLOR_ID>/<N>/600x600.jpg` (referenced for 8672)
+- Hero rotators: `https://com-magicscarf-web.s3.amazonaws.com/rotators/rotate_<RID>.main.jpg`
+
+All images resolve from the customer's CDN. Fallback chain: real `main_image` → `/i/p/` thumb → category fallback image.
+
+## What was upgraded
+
+| Area | Before (audited) | After (rebuild) |
+|---|---|---|
+| **Mobile experience** | Desktop-only navigation, no hamburger drawer visible from the audit pattern | Mobile-first responsive layout; hamburger drawer; cart-drawer; touch targets ≥44px (≥52px primary) |
+| **Header** | Multi-row chrome with rotating top strip, multiple logos appearing twice | Single sticky header — logo + 7-link nav + search pill + sign-in + cart |
+| **Login-gated pricing** | "Click Here For Pricing & Ordering" link that goes to wholesale-tunnel | WizCommerce-standard "Sign in for price" lock icon on every product card; PDP price box; Login → Add-to-Cart state machine |
+| **PDP gallery** | Linear stack of variant photos, no main+thumb gallery | Sticky main image + 4-thumb strip + 47-color variant grid with named labels (scrolls within max-height) |
+| **PLP discovery** | Long vertical list of variant photos, no filtering, no sort | Faceted filter sidebar (Subcategory / Color / Material / Pattern / In stock) + sticky sub-category pill bar + Sort dropdown + 4-col grid + pagination |
+| **Hero** | 7 rotating banner images (auto-advancing carousel) | Manual hero (older-B2B safe — no autoplay). User clicks thumbs to cycle. Trust line below CTA. |
+| **Trade affordances** | Show Schedule link in top strip, no calendar widget | Show Schedule grid (4 + 8 cards), trade-show CTA from home page |
+| **Account** | Order History + Favorites links | Full account dashboard — sidebar with avatar, recent orders table, open-orders/cart/net-30 KPIs |
+| **Footer** | 3-column footer (Customer Service / Information) | 5-column footer (Shop / Customer Service / Information / Wholesale + brand block with phone + payment pills) |
+| **Type scale** | Web-default body (~14–15px) | 17px body floor (older-B2B), Cormorant Garamond display + Inter body |
+| **Contrast** | Hero/category text low contrast in places | WCAG-AAA aim on body text; AA enforced on accent colors |
+| **CTA hierarchy** | Buttons reading as text links | Branded primary buttons (52px tall) in Magic Burgundy `#8B2942` |
+| **Faire integration** | Hero banner pointing to Faire only | Dedicated FAIRE band on home + `/faire` view with explicit copy |
+| **Reduced motion** | Auto-advance carousel | `@media (prefers-reduced-motion)` honored everywhere |
+
+## What was preserved deliberately (don't redesign the business)
+
+- **Category names** — exact, never paraphrased.
+- **47-color variant palette** for Cashmere Feel Ponchos — unchanged.
+- **Wholesale registration form fields** — exact same fields and tier options.
+- **Toll-free phone, copyright, social links** — verbatim.
+- **Half-price shipping language** — verbatim.
+- **Sign-up & save 50% offer** — verbatim.
+- **Faire link** — preserved as an alternate channel, not removed.
+- **Familiar storefront patterns** — cart top-right, search center-right, login top-right (older-B2B convention).
+
+## Assumptions made (worth confirming)
+
+1. **Primary brand color = Magic Burgundy `#8B2942`.** The live site uses a white theme with no strong accent visible. Burgundy is inferred from the brand register (Magic Scarf is a feminine wholesale women's fashion brand; burgundy/wine reads as elegant, ages well, has high contrast on a cream surface). Confirm with the customer before final ship.
+2. **Secondary surface = Warm Cream `#FAF6F1`** — chosen to soften pure-white look while staying brand-neutral.
+3. **Type pairing — Cormorant Garamond (display) + Inter (body)** — both Google Fonts. Cormorant lends the elegance the Magic Scarf product line warrants; Inter holds up for older-B2B legibility at 17px.
+4. **Trade-show schedule** — placeholder shows (ATL Apparel, NY NOW, Dallas, Vegas WSA/MAGIC). Replace with the customer's real 2026–2027 calendar before launch.
+5. **Founding year = 2003** — implied by "© Copyright 2020" + "20+ years" claim. Confirm with customer.
+6. **Showroom location = Los Angeles, CA** — implied by the brand's California design language. Confirm with customer.
+7. **Net-30 terms** — referenced as available "on approved accounts." Confirm whether enforced in the customer's current ERP.
+8. **8 sample product images** referenced via the audit-derived `/i/p/<pid>/N/300x300.jpg` URL pattern. If a thumb 404s, the page falls back to `main_image_<pid>.jpg` and then to the category-level image. Customer should supply the canonical product imagery for production migration.
+9. **MOQ 2 cases / case-pack 6** — used as the WizCommerce default for ponchos and shawls. Customer should confirm per category.
+10. **Social — Facebook + YouTube only.** No Instagram audited; if Magic Scarf has an Instagram presence, add it to footer + contact page.

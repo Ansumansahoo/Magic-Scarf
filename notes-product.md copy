@@ -1,0 +1,110 @@
+# Magic Scarf — Product / Implementation Notes
+
+## Business architecture preserved
+
+The rebuild does not alter the customer's category tree, product taxonomy, or B2B onboarding flow. Implementation follows what's already on the live site.
+
+### Channel model
+
+Magic Scarf operates two wholesale channels in parallel:
+
+1. **Direct wholesale at magicscarf.com** — login-gated pricing, 50%-off-first-order incentive, half-price shipping, regional trade-show schedule.
+2. **Faire reseller channel** — Net-60, free returns on first order, single-login convenience.
+
+The rebuild preserves both channels. Faire is featured in (a) the home-page Faire band, (b) a dedicated `/faire` view, and (c) the footer Shop column. Customers logging in directly should still be encouraged toward direct (better margin); shoppers without a wholesale account should be routed toward Faire as a low-friction entry.
+
+### Audience tiers
+
+Wholesale registration captures **Type of Business** and **Annual Sales** at signup (verbatim from audited form):
+
+| Business type | Annual sales tiers |
+|---|---|
+| Boutique · Clothing Store · Gift Shop | Under $250K → over $4M |
+| Retail Shows · Mall Cart/Kiosk · Home Parties | (smaller-volume) |
+| Multi-Location Retail · Wholesale Distributor · Other | (larger-volume) |
+
+This data drives downstream tier-pricing and credit-limit decisions in the ERP. Tier assignment should remain manual at first (Magic Scarf staff approve every wholesale application within 1 business day per the audit).
+
+## Merchandising flows
+
+### Product card (PLP)
+- Image + SKU eyebrow + title + category + variant-color chips (+N more) + "Sign in for price" lock + add-to-cart button
+- Hover state: "Quick view →" pill at bottom (touch devices show it always)
+- Heart/favorite button (top-right of image)
+- Top-left badges: New / Best Seller / Heritage / Low Stock / 10% Off (audit-derived from the live site's "Now 10% Off" + "LOW STOCK" labels on Best Picks)
+
+### PLP filters
+| Group | Source |
+|---|---|
+| Subcategory | `SUBCATS[<parent>]` — audited (e.g. Ponchos has 5 subs: Lightweight / Button / Dress / Autumn-Winter / Faux Fur) |
+| Color | 8-swatch row (Black / White / Wine / Navy / Gold / Sage / Terracotta / Blush) |
+| Material | Cashmere Feel / Pashmina / Silk Blend / Sueded Cloth / Velvet |
+| Pattern | Solid / Floral / Geometric / Animal Print / Paisley |
+| In stock | Available now / Pre-order |
+
+Sort options: Best sellers · New arrivals · Name A–Z · Recently restocked.
+
+### PDP (Product Detail)
+
+Layout: gallery left (sticky) + info right.
+
+**Gallery:** main image + 4-thumb strip below + 47-color variant grid (auto-fill, scrollable to max-height 280px).
+
+**Info column order (verbatim from WizCommerce older-B2B PDP standard):**
+1. Breadcrumbs
+2. SKU eyebrow + Spec sheet download link
+3. Product H1
+4. Category breadcrumb micro-line
+5. Stock pill ("In stock · Ready to ship in 24h" or "Low stock · Order soon")
+6. Description (verbatim from audited live PDP where harvested — e.g. for SKU 8672: "Perfect for all seasons. Soft and Comfortable. Versatility at its Best. Dress Up or Down. One Size Fits Most. 40″ from shoulder to point. 100% Acrylic. Imported.")
+7. Color variant grid with named labels (47 colors for ponchos; smaller arrays for other categories)
+8. Sourcing strip — Case-pack 6, MOQ 2 cases, Ships in 24h
+9. Login-gated price box ("🔒 Sign in to view")
+10. CTA: Sign in to View Price → after login → Add to Cart → after add → Quantity Stepper
+11. Trust strip — Half-price shipping / Trade only / Net-30 terms / Ships in 24h
+12. 4 accordions — Product Details · Specifications · Shipping & Returns · Care Instructions
+13. Related Products (always-fills-to-4 — same category first, fallback to other cats)
+
+### B2B workflow notes
+
+- **Login-gated pricing** is enforced everywhere prices appear (PLP cards, PDP price box, cart summary, account orders). No prices are ever fabricated in the markup.
+- **Add-to-Cart state machine**: Login → Add to Cart → Quantity Stepper. While logged out, the Add button opens the login modal.
+- **Case-pack 6** is the WizCommerce default for this catalog. Customer should confirm per-category pack sizes (vests, hats and brooches likely differ).
+- **MOQ 2 cases (12 units)** is the default. Confirm.
+- **Net-30 terms** language is shown as "available on approved accounts" — the actual approval flow stays in the ERP.
+
+## Migration data the customer needs to supply
+
+| Item | Format | Field map |
+|---|---|---|
+| Product list | CSV/XLSX | sku · pid · name · category_slug · description · case_pack · moq · weight · is_active · stock_status |
+| Variants | CSV | product_pid · variant_name · variant_image_url · stock_qty · variant_id |
+| Category tree | JSON | id · slug · name · parent_id · audited_image_url · seo_description |
+| Product images | URL or upload | mapped by pid; main_image + 3-5 alt views per product |
+| Hero rotators | URL or upload | 6 banner images (1290x900 desktop, 750x900 mobile) |
+| Trade-show calendar | XLSX or CSV | month · day_range · show_name · venue · city_state · booth_number · start_date · end_date |
+| Wholesale tier-pricing | XLSX | sku · tier_1 · tier_2 · tier_3 · tier_4 |
+| Press logos ("As Seen In") | SVG or PNG | (currently not in the build — add when supplied) |
+| Showroom address | text | for footer + contact page |
+| Founder/team photo | JPG | for About/story band (currently uses an audited rotator image as placeholder) |
+
+## Channel/visibility settings
+
+By default, every category and product is set to:
+- Visibility: **Web** (B2B website)
+- Inventory: **Live**
+- Login required: **Yes** (for prices)
+- Search indexed: **Yes**
+
+The Faire channel is read-only from this site (links out to the Faire storefront; not synced).
+
+## Known business-side gaps
+
+1. **No real Net-30 terms enforcement** — currently UI-only. The wholesale application captures business size but the actual credit-limit + payment-terms decision lives in the ERP. Confirm whether ERP integration is in scope for v1.
+2. **No real authentication** — all auth is demo. Login button shows demo alert; real implementation needs SSO or a custom auth module.
+3. **No real cart persistence** — cart state is in-memory only. Real implementation needs a session-tied cart store.
+4. **No real search** — search modal is a placeholder. Real implementation needs Algolia, Elasticsearch, or the WizCommerce search API.
+5. **No printable swatch sheet** — the link in the audited PDP ("Printable Swatch Page") is shown but not implemented in this prototype. Customer to supply the rendering logic or PDF.
+6. **Show schedule data is placeholder** — replace with the customer's real 2026–2027 calendar pre-launch.
+7. **About/founder block uses audited imagery** — needs a real founder photo or studio shot.
+8. **Press logos / "As Seen In" strip** is not yet built — add to home page if Magic Scarf has press mentions to feature.

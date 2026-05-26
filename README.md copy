@@ -1,0 +1,38 @@
+# Magic Scarf — WizCommerce Storefront Rebuild
+
+A ship-ready, single-file responsive prototype rebuilt from the live audit of [magicscarf.com](https://www.magicscarf.com/stores/eol/) and styled to WizCommerce's older-B2B wholesale standards.
+
+## How to run
+
+Double-click `index.html` — that's it. No build step, no server, no dependencies. Vanilla HTML/CSS/JS only.
+
+## What's included
+
+| File | Purpose |
+|------|---------|
+| `index.html` | Full storefront — Home, Catalog, PLP, PDP, Cart, Account, Show Schedule, Contact, Sign-in modal, Apply-for-Wholesale modal |
+| `notes.md` | Audit summary, what was preserved, what was upgraded, every assumption made |
+| `notes-tech.md` | Engineering reference — file structure, CSS tokens, JS function map |
+| `notes-product.md` | Implementation reference — business architecture, B2B workflows, migration data |
+| `notes-csm.md` | CSM talking points — preserved/upgraded comparison, demo walkthrough, customer Q&A |
+| `scorecard.md` | Redesign scorecard — old site vs new site across 14 dimensions |
+| `improvement-suggestions.md` | Recommended next-step improvements (post-launch roadmap) |
+| `qa-checklist.md` | QA validation checklist for handoff |
+| `component-image-sheet.xlsx` | Component-wise image + content requirements per breakpoint |
+| `client-approval-tracker.xlsx` | Sign-off tracker for the customer (rows × pages × stakeholders) |
+
+## How the site is structured
+
+The site uses a **hash router** inside one HTML file. Reachable views:
+
+- `#/` — Home
+- `#/catalog` — Full Magic Scarf Catalog (17 categories)
+- `#/c/<slug>` — Category PLP (e.g. `#/c/ponchos`)
+- `#/p/<sku>` — Product PDP (e.g. `#/p/8672`)
+- `#/cart` · `#/account` · `#/show-schedule` · `#/contact` · `#/sale` · `#/faire`
+
+Login and Apply-for-Wholesale are modals overlaying any view.
+
+## Browser support
+
+Chrome, Safari, Firefox, Edge — last 2 versions. Mobile Safari + Chrome on Android. Older-user-friendly: respects `prefers-reduced-motion`, body type at 17px floor, primary buttons ≥52px tall.

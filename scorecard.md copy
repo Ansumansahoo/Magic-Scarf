@@ -1,0 +1,31 @@
+# Magic Scarf — Redesign Scorecard
+
+Each dimension scored 1–10. Old = audited live site. New = WizCommerce rebuild.
+
+| # | Dimension | Old | New | Δ | Why |
+|---|---|---|---|---|---|
+| 1 | **Mobile experience** | 3 | 9 | +6 | Old: essentially desktop-only feel, no hamburger drawer, fixed widths break below 760px. New: mobile-first; hamburger drawer; 2-col card grid on phones; 17 px body floor preserved. |
+| 2 | **Brand consistency** | 6 | 9 | +3 | Old: brand identity exists but reads dated; multiple logos appearing twice on a single page. New: single brand mark + one wordmark fallback; consistent type pairing; cohesive Magic Burgundy + Cream surface. |
+| 3 | **Information architecture** | 7 | 9 | +2 | Old: full 17-category catalog and seasonal rail are present and well-named. New: preserves the IA exactly, surfaces the catalog twice (rail + grid) and the seasonal categories. |
+| 4 | **Product card** | 4 | 9 | +5 | Old: image + title + "See Available Options" link only — no SKU eyebrow, no color preview, no price gating, no add-to-cart action. New: SKU + title + category + 5-color chip preview (+N more) + login-gated price + heart + add button + quick-view pill. |
+| 5 | **PDP gallery** | 4 | 9 | +5 | Old: vertical photo list of every color variant in 600×600 — beautiful but unwieldy. New: sticky main image + 4-thumb strip + 47-swatch named-color variant grid (scrollable inside max-height). |
+| 6 | **PDP info hierarchy** | 5 | 9 | +4 | Old: title, availability, plain-text bullets, "Click here for pricing" link, then a long variant list. New: SKU eyebrow + spec download, H1, breadcrumb, stock pill, real description, variant grid, sourcing strip (case-pack / MOQ / 24h), login-gated price box, 4 accordions, related-fills-to-4 rail. |
+| 7 | **Login-gated pricing** | 5 | 10 | +5 | Old: pricing behind a "wholesale tunnel" link — works but inconsistent. New: WizCommerce-standard "Sign in for price" lock visible on every card, every PDP, every cart row. Single sign-in modal. |
+| 8 | **PLP discovery** | 3 | 9 | +6 | Old: no filtering, no sort, no faceting on category pages — just product tiles. New: subcategory pills at top + faceted sidebar (Subcategory / Color / Material / Pattern / Stock) + sort dropdown + product count + pagination. |
+| 9 | **Wholesale onboarding** | 7 | 9 | +2 | Old: working registration form with full B2B field set (Type of Business + Annual Sales tiers). New: same form, but as a polished split-panel modal with a 50%-off-first-order promo on the left and a clean field stack on the right. Field set unchanged. |
+| 10 | **Trust + B2B affordances** | 4 | 9 | +5 | Old: half-price shipping + phone in the announcement bar. New: half-price shipping retained + Net-30, ships-in-24h, trade-only, case-pack/MOQ surfaced contextually on PDP and PLP. |
+| 11 | **Trade-show schedule** | 6 | 9 | +3 | Old: linked from top strip ("Show Schedule" → separate page). New: 4-card preview band on home + 8-card full grid on `/show-schedule` view + show-card with date pill, venue, booth #. |
+| 12 | **Account dashboard** | 4 | 9 | +5 | Old: Order History + Favorites links. New: account sidebar with avatar, tier pill, KPI tiles (open orders / cart / Net-30 outstanding), recent orders table, full account nav. |
+| 13 | **Performance** | 6 | 9 | +3 | Old: many separate page loads, individual variant pages. New: single-file hash-routed SPA — instant navigation, lazy-loaded images, inline SVG icons, Google Fonts only external CSS. |
+| 14 | **Accessibility / Older-B2B fit** | 4 | 10 | +6 | Old: 14–15 px body type, hover-only interactions, autoplay carousel. New: 17 px body floor; 52 px primary buttons; AA/AAA contrast; `prefers-reduced-motion` honored; semantic markup; alt text on every image; labels on every input; focus-visible rings; skip-to-main link. |
+
+**Old total:** 68 / 140 (49%)
+**New total:** 126 / 140 (90%)
+**Net improvement:** **+58 points (+41 percentage points)**
+
+## Where the rebuild deliberately does NOT push higher
+
+- **Product photography** — using the audited image URLs as-is. Better photography would lift the rebuild from 9 to 10 across cards/PDP. Customer-supplied uplifted imagery is the easiest unlock.
+- **Auth + cart persistence** — UI is complete but backend is demo. Wiring real auth, real cart store, real search drops in cleanly without UI changes.
+- **Press / "As Seen In" strip** — not yet built (no audited press logos to source from). Adding it is a 30-minute job once content is supplied.
+- **About / story imagery** — uses an audited hero image as placeholder for the story band. A real founder/showroom photo will add brand depth.

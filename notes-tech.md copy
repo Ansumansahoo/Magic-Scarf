@@ -1,0 +1,184 @@
+# Magic Scarf — Engineering Notes
+
+## File structure
+
+```
+magic-scarf-site/
+├── index.html                 (single self-contained file — HTML + CSS + JS inline)
+├── README.md
+├── notes.md                   (audit + assumptions)
+├── notes-tech.md              (this file)
+├── notes-product.md
+├── notes-csm.md
+├── scorecard.md
+├── improvement-suggestions.md
+├── qa-checklist.md
+├── component-image-sheet.xlsx
+└── client-approval-tracker.xlsx
+```
+
+No build step. No npm. Vanilla HTML5 + CSS3 + ES6. Two external resources:
+- Google Fonts CSS (`Cormorant Garamond`, `Inter`)
+- Magic Scarf CDN images (logo, category thumbs, product images, hero rotators)
+
+## CSS token reference (`:root`)
+
+```css
+/* palette */
+--c-ink:        #1F1A1D     /* primary text */
+--c-ink-soft:   #4A4248     /* secondary text */
+--c-mute:       #7A7178     /* tertiary / labels */
+--c-line:       #E6DDDB     /* hairline borders */
+--c-line-soft:  #F1EAE7     /* card outlines */
+--c-surface:    #FAF6F1     /* cream surface band */
+--c-surface-2:  #F4ECE6     /* deeper cream */
+--c-card:       #FFFFFF     /* card surface only */
+--c-bg:         #FFFEFC     /* warm off-white page */
+--c-primary:    #8B2942     /* Magic Burgundy — buttons, links, accents */
+--c-primary-d:  #6F1E33     /* hover */
+--c-primary-s:  #B8576A     /* light primary (focus rings) */
+--c-accent:     #C8945C     /* warm gold — sale + perk badges */
+--c-success:    #4F7A4D
+--c-error:      #B23B3B
+
+/* typography */
+--f-display: 'Cormorant Garamond', Georgia, serif
+--f-body:    'Inter', system-ui, sans-serif
+--fs-base: 17px (older-B2B floor)
+--fs-3xl/4xl/5xl: 36/46/62
+
+/* radii */
+--r-sm/md/lg/xl/pill: 6/10/14/22/999
+
+/* shadows */
+--shadow-1/2/3 (subtle / card / modal)
+
+/* layout */
+--w-page: 1280px
+--h-announce: 38px
+--h-header: 88px (64px on mobile)
+--top-sticky: var(--h-announce) + var(--h-header)
+```
+
+## Component → selector map
+
+| Component | Root selector | Notes |
+|---|---|---|
+| Announcement bar | `.announce` / `.announce-row` | Includes phone link + sign-up perk + half-price shipping |
+| Header | `.header` inside `#header-slot` (slot uses `display: contents` to preserve sticky) | |
+| Search pill | `.search-pill` | Opens `#searchModal` |
+| Account button | `.btn-account` | Opens `#loginModal` |
+| Cart icon | `.iconbtn` with `.badge` | Linked to `#/cart` |
+| Mobile drawer | `.drawer` / `.drawer-panel` | Toggled via `is-open` class |
+| Hero | `.hero` / `.hero-grid` | Manual carousel — no autoplay |
+| Hero thumb cycle | `.hero-thumbs` / `.hero-thumb` | Click swaps `#heroImg` src |
+| Seasonal rail | `.cat-rail` / `.cat-tile` | 6-column desktop, 2-col mobile |
+| Catalog grid (17 tiles) | `.catalog-grid` / `.catalog-tile` | 4-col desktop, 3-col tablet, 2-col mobile |
+| Story band | `.story` / `.story-grid` / `.story-stats` | |
+| Show-schedule grid | `.shows-grid` / `.show-card` / `.show-date` | |
+| Faire band | `.faire-band` | |
+| Signup band | `.signup-band` / `.signup-form` | |
+| Footer | `.footer` / `.footer-grid` (5-col → 3-col → 2-col) | |
+| Breadcrumbs | `.crumb` | |
+| **PLP** | `.plp-head` + `.subcat-pills` + `.plp-body` (sidebar + grid) | |
+| Subcategory pills | `.subcat-pills a` | Crystorama-style top-of-PLP filter pills |
+| Filter sidebar | `.filter-card` (sticky to header offset) | |
+| Sort + count | `.plp-toolbar` / `.plp-sort` / `.plp-count` | |
+| **Product card** | `.pcard` | Image link → quick-view pill on hover. SKU eyebrow + title + cat + variant chips + login-gated price + add button |
+| Card variants | `.pcard__variants-row` / `.swatch-mini` | |
+| Pagination | `.pager` | |
+| **PDP grid** | `.pdp-grid` (sticky gallery left + info right) | |
+| PDP gallery | `.pdp-gallery` / `.pdp-img-card` (max-height: calc(100vh - 240px)) / `.pdp-thumbs` | |
+| PDP variants | `.var-row` (auto-fill grid, max-height: 280px, scrollable) / `.var-tile` with `.var-name` overlay | |
+| PDP price box | `.pdp-price-box` (login-gated) | |
+| PDP CTA | `.btn-primary` → opens login modal (B2B login-gated state machine) | |
+| PDP icons | `.pdp-icons` (4-up trust strip) | |
+| Sourcing strip | `.sourcing-strip` (case-pack / MOQ / ships in 24h) | |
+| Stock pill | `.pdp-stock` | |
+| Accordions | `.accordion` / `.accordion-item.is-open` | 4 sections: Details / Specs / Shipping / Care |
+| **Login modal** | `#loginModal` `.modal-card` (split: gradient promo + form) | |
+| **Register modal** | `#registerModal` (full B2B fields from audit) | |
+| Search modal | `#searchModal` (single-column narrow) | |
+| **Cart** | `.cart-grid` / `.cart-list` / `.cart-row` / `.cart-summary` | |
+| **Account** | `.account` (sidebar + main) / `.acc-side` / `.acc-nav` / `.acc-table` | |
+| Contact form | `.contact-grid` / `.contact-info` | |
+
+## JS function reference
+
+| Function | What it does |
+|---|---|
+| `route()` | Reads `location.hash`, sets active nav, swaps view, calls `renderPlp` / `renderPdp` / `renderCart` as needed |
+| `setActiveNav(path)` | Highlights matching nav item with `.is-active` |
+| `showView(viewId)` | Toggles `.is-active` on `.view` elements; scrolls to top |
+| `renderCatalogGrid(targetId)` | Renders the 17-tile Magic Scarf Catalog into a target div |
+| `renderSeasonal()` | Renders the 6-tile seasonal rail |
+| `renderShows(targetId, list)` | Renders trade-show grid |
+| `renderPlp(slug)` | Builds PLP: title, audited description, subcat pills, sidebar filters, 16-product grid, count, pagination |
+| `renderPdp(sku)` | Builds PDP: gallery, thumbs, 47-color variant grid, audit-style description, accordions, related-products always-fills-to-4 |
+| `renderCart()` | Builds cart with 3 sample line items pulled from `SAMPLE_PRODUCTS` |
+| `renderSale()` | Sale PLP — first 12 products as discounted |
+| `productCardHtml(p, idx)` | Single product card markup — used by every grid |
+| `realProductImg(p, idx)` | Returns `https://www.magicscarf.com/i/p/<pid>/<n>/300x300.jpg` |
+| `mainProductImg(p)` | Returns `https://www.magicscarf.com/stores/common_files/products/main_image_<pid>.jpg` |
+| `imgFor(slug, idx)` | Category-level fallback image |
+| `colorChip(name)` | Returns hex from `SWATCH` map |
+| `openLogin()` / `closeLogin()` | Toggle login modal |
+| `openRegister()` / `closeRegister()` | Toggle register modal |
+| `closeDrawer()` | Close mobile drawer |
+| `toggleAccordion(btn)` | Toggle PDP accordion item |
+
+## Sticky-offset table
+
+| Element | top |
+|---|---|
+| Header wrapper | `0` |
+| `.header-wrap` (sticky) | inherits via `#header-slot { display: contents }` so the header sticks to viewport top |
+| Filter card | `calc(var(--top-sticky) + 16px)` |
+| Cart summary | `calc(var(--top-sticky) + 16px)` |
+| PDP gallery | `calc(var(--top-sticky) + 16px)` |
+| Account sidebar | `calc(var(--top-sticky) + 16px)` |
+
+## Responsive breakpoints
+
+```
+≤480px  — extra-tight phone (cards 2-col, hero stacked, drawer-only nav)
+≤760px  — phone (header collapses, footer 2-col)
+≤1100px — tablet (nav-primary collapses to drawer, PLP becomes 1-col body, grid 3-col)
+≥1100px — desktop (full nav, 4-col grid, sidebar PLP)
+≥1500px — wide desktop (no further changes — `--w-page: 1280px` caps content)
+```
+
+## Cross-cutting risks (must-watch in production)
+
+1. **`#header-slot { display: contents }`** is required because the header is wrapped in a slot div. Without it the slot's auto-height becomes the sticky element's containing block, and the header un-sticks on scroll.
+2. **No nested `<a>`** — verified via regex check during build. The product card uses `.pcard__link` for the image+title link and a `<button>` for the Add-to-Cart action so they don't conflict.
+3. **Mega menu** — replaced with click-only nav at the older-B2B level. If a true mega menu is added later, it MUST be a top-level sibling of `<header>` with `position: fixed` and JS-positioned `top` recomputed on scroll/resize/open. Never `position: absolute; top: 100%`.
+4. **PDP variant grid scrolls** — `max-height: 280px; overflow-y: auto` keeps the 47-swatch grid from pushing the PDP layout vertically. Tested with 47 items.
+5. **PDP gallery** — `.pdp-img-card` declares `max-height: calc(100vh - 240px)` so main image + thumbs fit one viewport.
+6. **Image fallback chain** — every product image has a 3-step fallback: `main_image_<pid>` → `/i/p/<pid>/N/` → category fallback. This handles missing images on Magic Scarf's CDN gracefully.
+7. **`prefers-reduced-motion`** — globally honored via the `@media` block. All transitions collapse to ~0ms.
+8. **Hero is manual** — no autoplay carousel anywhere. The hero thumbs require user action.
+
+## CMS / data binding hooks
+
+When wiring up to the WizCommerce CMS, swap these JS arrays with API responses:
+
+| Array | Source | Bind to |
+|---|---|---|
+| `CATALOG` | `/api/categories?level=top` | Catalog grid + nav + footer |
+| `SEASONAL` | `/api/categories?seasonal=true&limit=12` | Seasonal rail |
+| `SUBCATS` | `/api/categories/<id>/children` | PLP subcat pills + sidebar filter |
+| `SAMPLE_PRODUCTS` | `/api/products?category=<slug>&limit=16` | PLP grid |
+| One product | `/api/products/<sku>` | PDP fields (name, desc, colors, pid, badge, stock, case-pack, MOQ) |
+| `SHOWS` / `SHOWS_FULL` | `/api/trade-shows?upcoming=true` | Show schedule |
+| Cart line items | `/api/cart` | Cart view |
+| Account dashboard | `/api/account/me` + `/api/orders?recent=true` | Account view |
+
+Login modal posts to `/api/auth/login`. Register modal posts to `/api/wholesale/apply`. Both are placeholder demo handlers in this build.
+
+## Performance notes
+
+- **No frameworks** — page weight is ~70 KB HTML, plus CDN-hosted Google Fonts and product images.
+- **Lazy-loaded images** — `loading="lazy"` on every product/category image.
+- **No icons CDN** — icons are inline SVG.
+- **No JS framework runtime** — all rendering is template-string innerHTML, fast and small.

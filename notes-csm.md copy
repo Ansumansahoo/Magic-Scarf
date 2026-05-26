@@ -1,0 +1,67 @@
+# Magic Scarf — CSM Talking Points
+
+## One-paragraph design rationale
+
+> "We audited your live site, harvested every brand asset — your logo, your full 17-category catalog, your 47-color poncho palette, your toll-free number, your 50%-off-first-order language — and rebuilt the storefront in the WizCommerce framework. We didn't redesign your business. We re-skinned the chrome, upgraded mobile responsiveness, added login-gated pricing, modernized the product card and PDP, and tuned every typography and contrast decision to your older-skewing wholesale buyer. Every piece of brand identity Magic Scarf has earned over 20+ years stays exactly where you put it."
+
+## What we preserved (verbatim)
+
+- The 17-category Magic Scarf Catalog — every name preserved exactly.
+- The 13-tile seasonal rail of the homepage (Oblong Scarves, Infinity Scarves, etc.).
+- All audited subcategory trees (Ponchos has 5 subs · Scarves & Shawls has 7).
+- The full 47-color variant palette for Cashmere Feel Ponchos (SKU 8672).
+- 70+ real product names, descriptions, and image URLs from the audit.
+- Toll-free phone: 1-866-546-6256 — featured in announcement bar, header, footer, contact page, and account view.
+- Sale message: "Half price shipping on all services. We pay the difference."
+- Sign-up offer: "Sign Up & get 50% Off."
+- Wholesale registration form — every audited field, every tier option, every business type.
+- Faire as a parallel channel (link in nav, dedicated band, footer link, Faire view).
+- Facebook + YouTube social — only the platforms the customer audited as actually using.
+
+## What we upgraded
+
+- **Mobile-first responsive** — the audited site is desktop-only feeling. The rebuild reflows beautifully on phone and tablet.
+- **Login-gated pricing** — the WizCommerce-standard "Sign in for price" lock on every card. Replaces the "Click Here For Pricing" link approach.
+- **Product card** — modern WizCommerce card with SKU eyebrow, color-chip preview, hover quick-view pill, login-gated price, single-tap heart.
+- **PDP gallery** — sticky main + thumb strip + 47-swatch named-color variant grid (scrollable inside max-height) instead of a long vertical photo list.
+- **PDP info hierarchy** — stock pill, sourcing strip (case-pack / MOQ / ships in 24h), 4 accordions (Details / Specs / Shipping / Care), related-products always-fills-to-4 rail.
+- **PLP filtering** — sticky subcategory pills + faceted sidebar (Subcategory / Color / Material / Pattern / In stock) + sort dropdown + product count.
+- **Cart** — modern cart-list + sticky summary sidebar with login-gated subtotal.
+- **Account dashboard** — sidebar with avatar + tier pill, KPI tiles (open orders / cart items / Net-30 outstanding), recent orders table.
+- **Trade-show schedule** — 4-card preview on home + 8-card full grid on `/show-schedule`.
+- **Hero** — clean, calm, manual-only carousel (no autoplay — older-B2B safe).
+- **Contact page** — full form + reach card with phone, email, hours, showroom by appointment.
+- **Footer** — five columns (Shop / Customer Service / Information / Wholesale + brand block) with phone, social, payment pills, base bar.
+- **Type scale** — 17 px body floor, Cormorant Garamond display + Inter body. Bigger, more readable, more elegant.
+- **Brand color** — Magic Burgundy (#8B2942) as the primary accent across buttons, links, badges, focus states.
+
+## Demo walkthrough (5-minute customer call)
+
+1. **Open the home page.** Point out: announcement bar with the half-price-shipping line, the sticky single-row header, the manual hero (no autoplay — accessibility & older-buyer-friendly), the 6-tile Seasonal Categories rail, then the full 17-tile Magic Scarf Catalog grid.
+2. **Click into "Ponchos."** Show the Crystorama-style sub-category pills at top of PLP, the faceted filter sidebar, the 16-card 4-column grid. Hover over a card to surface the "Quick view →" pill. Note "Sign in for price" lock on every card.
+3. **Click into "Cashmere Feel Ponchos" (SKU 8672).** Show: the sticky main image, the 4-thumb strip, the 47-color variant grid (the audited palette in full). Click swatches and watch the active label update. Show the sourcing strip (case-pack / MOQ / ships in 24h), the login-gated price box, the 4 accordions, and the always-fills-to-4 Related Products rail at the bottom.
+4. **Click "Sign In."** Show the modal — split panel with the "50% off first order" promo, tabs to switch to Apply, full B2B field set on the Apply form (matching the audited wholesale registration).
+5. **Click the cart icon.** Show the cart with line items pulled from the catalog, sticky order-summary sidebar, login-gated subtotal.
+6. **Open the menu on mobile.** Show the drawer with all 9 nav items + Sign In button + Call CTA.
+7. **Switch to Account view.** Show the dashboard with KPIs and recent orders table — the experience your top customers will live in once they're logged in.
+
+## Comparison summary (5 bullets the customer will appreciate)
+
+- **Mobile is real now.** The audited site is essentially desktop-only. The rebuild is mobile-first; cards reflow to 2-up, navigation collapses to a drawer, every touch target is ≥44 px.
+- **Pricing is gated the WizCommerce way.** Buyers see "Sign in for price" everywhere and a single-modal apply-or-sign-in flow. No more "click here for pricing" link bouncing.
+- **The PDP shows your full color story.** All 47 audited Cashmere Feel Poncho colors render as a named-swatch grid, scroll-contained so the layout doesn't blow out.
+- **Older buyers can read it.** Body type at 17 px floor, primary buttons at 52 px tall, no auto-advancing carousels, click-only navigation, plain-language CTAs.
+- **Your brand stays your brand.** Categories named exactly as you have them. Magic Burgundy as the accent (your call to confirm). Heritage line (Victorian Lace) flagged. Faire still a first-class channel. Phone number on every page.
+
+## Questions to finalize before launch
+
+1. **Brand colors** — primary inferred as Magic Burgundy `#8B2942`. Confirm or supply your own. (Live site uses no strong accent; we picked one for elegance + contrast.)
+2. **Logo file** — using the audited PNG from CDN. Do you have an SVG or higher-res version?
+3. **47-color swatches** — we mapped each audited color name to a hex chip. Customer to confirm the hex values match your physical fabric.
+4. **Trade-show calendar** — replace placeholder shows (ATL Apparel / NY NOW / Dallas / Vegas) with your real 2026–2027 schedule.
+5. **Founder / story photo** — currently uses an audited hero image. Provide a studio or showroom photo.
+6. **Press / "As Seen In"** — do you have featured-in logos? If yes, send and we'll add the strip to home.
+7. **Showroom city** — confirmed Los Angeles? Or supply the actual address.
+8. **Founding year** — implied 2003 from "© 2020 + 20+ years"; confirm.
+9. **Net-30 enforcement** — UI references it; is your ERP wired for terms?
+10. **Search** — placeholder modal in this build. Algolia, Elasticsearch, or WizCommerce native search?

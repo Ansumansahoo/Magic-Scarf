@@ -1,0 +1,163 @@
+# Magic Scarf — QA Validation Checklist
+
+Walk this before handoff. Mark each item ✅ or ❌. Block ship on any ❌.
+
+## A · Universal hard rules
+
+- [ ] Page opens by double-clicking `index.html` (no server required)
+- [ ] No console errors when home page loads
+- [ ] No 404 image references in DevTools Network tab
+- [ ] No nested `<a>` anywhere (auto-checked: 0 instances)
+- [ ] No "lorem ipsum" / "TODO" / `[placeholder]` / `via.placeholder.com` (auto-checked: 0 instances)
+- [ ] No fabricated dollar prices on any product card or PDP
+- [ ] No pure white `#FFFFFF` outside cards/swatch (audit: 2 acceptable instances — card surface + white swatch)
+- [ ] No pure black `#000000` (audit: 0 instances)
+- [ ] Single self-contained HTML file under 1.5 MB
+
+## B · Responsive
+
+- [ ] **375 px (iPhone SE)** — no horizontal scroll, 2-col card grid, hamburger menu reaches all 9 nav items
+- [ ] **768 px (iPad portrait)** — 3-col card grid, header collapses appropriately
+- [ ] **1024 px** — 3-col grid, primary nav visible
+- [ ] **1280 px** — full layout with 4-col card grid
+- [ ] **1500 px+** — content stays capped at `--w-page: 1280px`, no awkward stretching
+- [ ] All sections reflow gracefully — no overflowing cards, no clipped text
+
+## C · Header / chrome
+
+- [ ] Sticky header stays pinned to viewport top on scroll
+- [ ] Logo image loads from `magicscarf.com/stores/eol/assets/images/logo.png`; if 404 the wordmark fallback shows
+- [ ] Search pill opens search modal
+- [ ] Sign-in button opens login modal (not register)
+- [ ] Cart icon links to `#/cart` and shows badge
+- [ ] Mobile hamburger opens drawer; drawer close button works; ESC also closes
+- [ ] Announcement bar shows half-price-shipping line + 50%-off perk + tel: link
+- [ ] Tel: link is clickable (`tel:1-866-546-6256`)
+
+## D · Home page
+
+- [ ] Hero copy renders with branded eyebrow + H1 + lead + 2 CTAs + trust line
+- [ ] Hero figure shows a real Magic Scarf rotator image (rotate_1291.main.jpg or similar)
+- [ ] 6 hero thumbs visible; clicking a thumb swaps the main hero image (manual — no autoplay)
+- [ ] **Seasonal Categories** rail renders 6 tiles with audited names + images
+- [ ] **Magic Scarf Catalog** grid renders all 17 categories with audited names + images
+- [ ] Story band renders with photo + copy + 3 stats
+- [ ] Trade-show schedule shows 4 cards
+- [ ] FAIRE band renders with link
+- [ ] Signup band renders with email field + apply button
+
+## E · Catalog page (`#/catalog`)
+
+- [ ] Breadcrumb shows: Home / Catalog
+- [ ] All 17 catalog tiles render with audited names + images
+- [ ] Clicking any tile routes to `#/c/<slug>`
+
+## F · PLP (`#/c/ponchos`)
+
+- [ ] Breadcrumb: Home / Catalog / Ponchos
+- [ ] H1: "Ponchos" with audited description
+- [ ] Subcategory pills: All Ponchos / Lightweight / Button / Dress / Autumn-Winter / Faux Fur
+- [ ] Filter sidebar: Subcategory, Color (8 swatches), Material, Pattern, In stock — all render
+- [ ] Sort dropdown: Best sellers / New / Name / Recently restocked
+- [ ] Product count "1–16 of 128 products" (or actual count)
+- [ ] **16 product cards** render in a 4-col grid on desktop
+- [ ] Each card: SKU eyebrow / title / category / 5-color chips + count / "Sign in for price" lock / + button
+- [ ] Hovering a card surfaces a "Quick view →" pill
+- [ ] Heart icon clickable; toggles fill on click
+- [ ] Pagination: 6 page buttons + prev/next
+
+## G · PDP (`#/p/8672`)
+
+- [ ] Breadcrumb: Home / Catalog / Ponchos / Cashmere Feel Ponchos
+- [ ] Sticky main image renders (real Magic Scarf product image)
+- [ ] 4 thumb images below main; clicking swaps main image
+- [ ] H1: "Cashmere Feel Ponchos"
+- [ ] Stock pill: "In stock · Ready to ship in 24h"
+- [ ] Description: audited copy ("Perfect for all seasons. Soft and Comfortable…")
+- [ ] **47-color variant grid** renders inside `.var-row` (auto-fill, max-height 280px)
+- [ ] Variant tiles show color chip + named label overlay
+- [ ] Clicking a variant tile updates the active color label
+- [ ] Sourcing strip: Case-pack 6 / MOQ 2 cases / Ships in 24h
+- [ ] Login-gated price box: "🔒 Sign in to view"
+- [ ] CTA: "Sign in to View Price" button works → opens login modal
+- [ ] 4 trust icons: Half-price shipping / Trade only / Net-30 / Ships in 24h
+- [ ] 4 accordions: Product Details (open by default) / Specifications / Shipping / Care
+- [ ] Accordions toggle correctly
+- [ ] Related Products always-fills-to-4 rail at bottom
+
+## H · Cart (`#/cart`)
+
+- [ ] 3 line items render with real Magic Scarf images
+- [ ] Each row: image / title / SKU + variant / qty stepper / remove / login-gated price
+- [ ] Sticky summary sidebar with login-gated subtotal + Sign-In-to-Checkout button
+- [ ] Cart badge in header shows correct count
+
+## I · Account (`#/account`)
+
+- [ ] Sidebar: avatar (SB) + business name + tier pill (Tier 2 · Net-30)
+- [ ] Nav items: Dashboard / Orders / Invoices / Favorites / Settings
+- [ ] 3 KPI tiles: Open orders / Cart items / Net-30 outstanding
+- [ ] Recent orders table: 3 rows with shipped/processing pills
+
+## J · Show schedule (`#/show-schedule`)
+
+- [ ] 8 show cards render with date pill + name + venue + booth #
+
+## K · Contact (`#/contact`)
+
+- [ ] Form: First / Last / Email / Business / Topic / Message
+- [ ] Reach panel: phone, email, hours, showroom (by appointment)
+- [ ] Facebook + YouTube social links
+
+## L · Modals
+
+- [ ] **Login modal** opens from header Sign-In button + every login-gated CTA
+- [ ] Login modal: split panel with promo (left) + form (right)
+- [ ] Apply tab on login modal switches to register modal
+- [ ] **Register modal** opens from "Apply for Wholesale" CTAs
+- [ ] Register modal renders all audited fields: email, business name, contact name (first/last), phone, zip, type-of-business dropdown (9 options), annual sales tier dropdown (7 options), password
+- [ ] Search modal opens from search pill
+- [ ] All modals close via X button, ESC key, or click on backdrop
+
+## M · Accessibility
+
+- [ ] Skip-to-main link visible on focus
+- [ ] Tab order is logical from header → main → footer
+- [ ] All interactive elements have visible focus rings (3 px primary-soft outline)
+- [ ] All images have meaningful `alt` text
+- [ ] All form inputs have associated `<label>` elements
+- [ ] Color contrast on body text ≥ WCAG AA (test with contrast checker)
+- [ ] No hover-only interactions without tap equivalent (touch devices show quick-view pill always)
+- [ ] No autoplay carousels — hero is manual-only
+- [ ] `prefers-reduced-motion` respected (transitions collapse to ~0ms)
+
+## N · Older-B2B specific
+
+- [ ] Body text floor of 17px maintained on mobile
+- [ ] Primary buttons (Sign In, Apply, Sign In to Checkout) ≥ 52 px tall
+- [ ] No mega menu — replaced with click-only nav (preserves familiarity)
+- [ ] Login state always visible (Sign In button, never icon-only at desktop)
+- [ ] Plain language ("Sign in to View Price" not "Authenticate for tier-pricing")
+- [ ] Familiar storefront chrome — cart top-right, search center, login top-right, logo left
+
+## O · Audit-mode preserved
+
+- [ ] All 17 catalog category names verbatim
+- [ ] All 13 seasonal-rail category names verbatim
+- [ ] Toll-free phone 1-866-546-6256 verbatim across announce / header / footer / contact / account
+- [ ] "Half price shipping on all services. We pay the difference." verbatim in announce bar
+- [ ] "Sign Up & get 50% Off" verbatim in announce bar + register modal
+- [ ] Faire link preserved (home band + nav + dedicated `/faire` view)
+- [ ] Facebook + YouTube social only (no fabricated Instagram)
+- [ ] Wholesale registration form fields match audited form exactly
+- [ ] 47 audited Cashmere Feel Poncho colors all rendered as variant tiles
+- [ ] Audited PDP description used verbatim ("Perfect for all seasons…")
+
+## P · Sign-off
+
+| Reviewer | Role | Pass/fail | Date | Signature |
+|---|---|---|---|---|
+| | Engineering | | | |
+| | Product | | | |
+| | CSM | | | |
+| | Customer (Magic Scarf) | | | |
